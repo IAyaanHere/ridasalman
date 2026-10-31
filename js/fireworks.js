@@ -1,4 +1,6 @@
-/* Golden blooms overlap into a continuous loop across all three scenes. */
+/* Golden blooms overlap into a continuous loop across all scenes.
+   Closing celebration fireworks trigger when the section comes into view,
+   burst for 4 seconds, and slowly & gracefully disappear. */
 (function () {
   'use strict';
   const palette = ['255,241,186', '255,207,104', '219,151,43'];
@@ -9,22 +11,28 @@
     glow.addColorStop(.4,`rgba(${colour},.32)`); glow.addColorStop(1,`rgba(${colour},0)`);
     brush.fillStyle=glow; brush.fillRect(0,0,32,32); return sprite;
   });
+
   document.querySelectorAll('[data-firework-scene]').forEach(canvas => {
     const context = canvas.getContext('2d'), kind = canvas.dataset.fireworkScene;
+    const isClosing = kind === 'closing';
+
     const cues = kind === 'hero' ? [
       {t:900,x:.10,y:.15}, {t:1750,x:.90,y:.23}, {t:3200,x:.08,y:.38},
       {t:4050,x:.92,y:.43}, {t:5700,x:.14,y:.20}, {t:6500,x:.88,y:.16},
+    ] : isClosing ? [
+      {t:250,x:.22,y:.22}, {t:900,x:.78,y:.26}, {t:1600,x:.50,y:.14},
+      {t:2300,x:.16,y:.32}, {t:3000,x:.84,y:.30},
     ] : [
       {t:900,x:.14,y:.23}, {t:1750,x:.88,y:.31}, {t:3100,x:.45,y:.12},
       {t:4250,x:.09,y:.43}, {t:5200,x:.93,y:.42}, {t:6500,x:.60,y:.18},
     ];
-    const loopMs=7600;
+
+    const loopMs = isClosing ? 12000 : 7600;
     let width=0,height=0,frame=0,start=0,lastDraw=0,particles=[],flashes=[],nextBurst=0;
+
     function sceneHeight() { return kind==='garden' ? height*.29 : height; }
     function launchPoint(cue) {
       if(kind!=='garden') return {x:cue.x*width,y:cue.y*height};
-      // Keep the launches in the lower artwork, with the whole bloom and its
-      // falling sparks inside the formal section rather than a shallow canvas.
       const radius=Math.min(width*.28,height*.18),padding=12;
       const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
       return {
@@ -47,7 +55,6 @@
     function burst(cue) {
       const {x,y,radius}=launchPoint(cue);
       flashes.push({x,y,age:0});
-      // Three shells produce a full bloom with both long rays and a dense core.
       [100,76,48].forEach((count,shell) => {
         const offset=Math.random()*Math.PI*2;
         for(let i=0;i<count;i++) {
@@ -66,7 +73,7 @@
       if(!eligible()) { stop(); return; }
       if(now-lastDraw<30) { frame=requestAnimationFrame(draw); return; }
       const delta=Math.min((now-lastDraw)/1000,.06); let elapsed=now-start;lastDraw=now;
-      if(elapsed>=loopMs) {
+      if(elapsed>=loopMs && !isClosing) {
         start+=Math.floor(elapsed/loopMs)*loopMs;elapsed=now-start;nextBurst=0;
         canvas.dataset.cycle=String(Number(canvas.dataset.cycle||0)+1);
       }
@@ -97,7 +104,6 @@
         p.x+=p.vx*delta;p.y+=p.vy*delta;
         const fade=Math.min(1,(p.life-p.age)/1.15),twinkle=.76+.24*Math.sin(p.age*17+p.phase);
         const alpha=Math.max(0,fade*twinkle),colour=palette[p.colour];
-        // Bright radial rays immediately expand into sparkling, curved tails.
         const tail=p.age<.5?{x:p.ox,y:p.oy}:p.tail[0];
         context.strokeStyle=`rgba(${colour},${alpha*.7})`;context.lineWidth=p.size;
         context.beginPath();context.moveTo(tail.x,tail.y);
@@ -114,9 +120,58 @@
       canvas.dataset.fireworks='playing';canvas.dataset.cycle=String(Number(canvas.dataset.cycle||0)+1);
       frame=requestAnimationFrame(draw);
     }
+
     new ResizeObserver(resize).observe(canvas);
+    window.addEventListener('pagehide',stop);
+
+    // Closing section fireworks: trigger when user scrolls into the section,
+    // play for 4 seconds, then slowly and gracefully disappear over 2 seconds.
+    if (isClosing) {
+      const section = canvas.closest('#celebration') || document.getElementById('celebration');
+      let closingTriggered = false;
+
+      function triggerClosingFireworks() {
+        if (closingTriggered) return;
+        closingTriggered = true;
+        canvas.classList.remove('is-faded');
+        play();
+
+        // After 4 seconds, slowly disappear
+        setTimeout(() => {
+          canvas.classList.add('is-faded');
+          setTimeout(() => {
+            stop();
+          }, 2200);
+        }, 4000);
+      }
+
+      if (section && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !closingTriggered && document.body.classList.contains('is-open')) {
+              triggerClosingFireworks();
+              obs.unobserve(section);
+            }
+          });
+        }, { threshold: 0.15 });
+        obs.observe(section);
+
+        new MutationObserver(() => {
+          if (!closingTriggered && document.body.classList.contains('is-open')) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              triggerClosingFireworks();
+              obs.unobserve(section);
+            }
+          }
+        }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      } else {
+        setTimeout(triggerClosingFireworks, 1000);
+      }
+      return;
+    }
+
     document.addEventListener('visibilitychange',()=>document.hidden?stop():play());
     new MutationObserver(()=>{if(eligible()&&!frame) play();}).observe(document.body,{attributes:true,attributeFilter:['class']});
-    window.addEventListener('pagehide',stop);
   });
 })();

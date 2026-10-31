@@ -49,15 +49,15 @@
     // Date Grid: Day, Month, Year
     const dateGrid = element('div', 'scratch-date-grid');
     const items = config.scratch.items || [
-      { value: '23', label: 'Day' },
+      { value: '15', label: 'Day' },
       { value: 'JAN', label: 'Month' },
       { value: '2027', label: 'Year' }
     ];
     items.forEach((item, index) => {
       if (index > 0) {
-        const divider = element('span', 'scratch-date-divider', '✦');
-        divider.setAttribute('aria-hidden', 'true');
-        dateGrid.append(divider);
+        const sep = element('div', 'scratch-date-sep');
+        sep.setAttribute('aria-hidden', 'true');
+        dateGrid.append(sep);
       }
       const col = element('div', 'scratch-date-col');
       col.append(
@@ -67,18 +67,18 @@
       dateGrid.append(col);
     });
 
-    // Footer with weekday, ceremony time & venue
+    // Footer with weekday, ceremony time
     const footer = element('div', 'scratch-reveal-footer');
     const firstEvent = config.events?.[0];
     const weekdayText = firstEvent?.weekday
       ? `${firstEvent.weekday}${firstEvent.programme?.[0]?.time ? ' · ' + firstEvent.programme[0].time : ''}`
-      : (config.countdown?.dateLine || '');
+      : (config.countdown?.dateLine || 'Friday · After Namaz e Magrib');
     if (weekdayText) {
       footer.append(element('span', 'scratch-reveal-weekday', weekdayText));
     }
-    const venueText = firstEvent?.venue || '';
-    if (venueText) {
-      footer.append(element('span', 'scratch-reveal-venue', venueText));
+    const occasionText = config.hero?.occasions || firstEvent?.name || 'Nikah Ceremony';
+    if (occasionText) {
+      footer.append(element('span', 'scratch-reveal-venue', occasionText));
     }
 
     card.append(header, dateGrid, footer);
