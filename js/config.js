@@ -60,7 +60,7 @@ window.INVITATION_CONFIG = {
     "invitation": "Together with our families, we cordially invite you to share in the joy and honour us with your presence at the Nikah of",
     "brideRelation": "Daughter of",
     "brideParents": "Mrs. Naseem & Mr. Abdulrahim Abdulrauf Shaikh",
-    "joining": "and",
+    "joining": "with",
     "groomRelation": "Son of",
     "groomParents": "Mrs. Farzana & Mr. Musa Abdulla Mamtule",
     "closing": ""

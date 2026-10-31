@@ -48,22 +48,11 @@
     // Main Wedding Date (January 15, 2027)
     const dateText = element('h3', 'scratch-reveal-date', 'January 15, 2027');
 
-    // Day & Ceremony Time (Friday • After Namaz e Magrib)
+    // Day only (Friday) - Timing and dinner note removed per user request
     const firstEvent = config.events?.[0];
-    const ceremonyDetail = element('p', 'scratch-reveal-time',
-      firstEvent?.weekday && firstEvent.programme?.[0]?.time
-        ? `${firstEvent.weekday} • ${firstEvent.programme[0].time}`
-        : 'Friday • After Namaz e Magrib'
-    );
+    const dayText = element('p', 'scratch-reveal-time', firstEvent?.weekday || 'Friday');
 
-    // Dinner Note (Dinner to be followed)
-    const dinnerNote = element('p', 'scratch-reveal-note',
-      firstEvent?.programme?.[1]?.name
-        ? `${firstEvent.programme[1].name} to be followed`
-        : 'Dinner to be followed'
-    );
-
-    card.append(sparkles, eyebrow, dateText, ceremonyDetail, dinnerNote);
+    card.append(sparkles, eyebrow, dateText, dayText);
 
     // Scratch Canvas
     const canvas = element('canvas', 'scratch-frame-canvas');

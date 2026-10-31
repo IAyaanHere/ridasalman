@@ -106,11 +106,71 @@ body { background:#e9e2d6; }
 .map-link:hover { background:#f2ece0; }
 .location-demo-message { max-width:280px; color:var(--muted); font-size:12px; line-height:1.7; }
 .calendar-link { border-color:transparent; background:transparent; padding:7px 10px; font-size:10px; text-decoration:underline; text-underline-offset:4px; }
-.gifts-section { position:relative; background:var(--ivory); text-align:center; padding:80px 0 0; overflow:hidden; }
-.gift-copy { position:relative; z-index:1; width:78%; max-width:430px; margin:0 auto -45px; }
-.gift-copy h2 { font-family:var(--font-display); font-size:clamp(33px,8.5vw,45px); line-height:1.15; color:var(--text); margin:15px auto 25px; }
+.gifts-section { position:relative; background:var(--ivory); text-align:center; padding:clamp(60px, 14vw, 85px) 0 0; overflow:hidden; }
+.gift-copy { position:relative; z-index:2; width:88%; max-width:440px; margin:0 auto -70px; }
+.gift-copy h2 { font-family:var(--font-display); font-size:clamp(30px,8vw,44px); line-height:1.15; color:var(--text); margin:14px auto 16px; }
 .gift-message { font-size:14px; line-height:1.9; max-width:330px; margin:auto; }
-.hands-image { width:100%; height:auto; display:block; mask-image:linear-gradient(transparent 0%,#000 30%); }
+
+/* Romantic Dedication on Silk in Hands Section */
+.gift-dedication {
+  position: relative;
+  margin: 20px auto 30px;
+  padding: 0 12px;
+  text-align: center;
+}
+
+.gift-dedication-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 10px;
+  color: #b8934a;
+  font-size: 11px;
+}
+
+.gift-dedication-ornament::before,
+.gift-dedication-ornament::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184, 147, 74, 0.55), transparent);
+}
+
+.gift-dedication .dedication-names {
+  font-family: var(--font-script, 'Parisienne', cursive) !important;
+  font-size: clamp(32px, 8.4vw, 46px) !important;
+  font-weight: 400 !important;
+  color: #94713c !important;
+  line-height: 1.25 !important;
+  margin: 0 0 4px !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.01em !important;
+}
+
+.gift-dedication .dedication-date {
+  font-family: var(--font-body, 'Marcellus', serif) !important;
+  font-size: clamp(13px, 3.6vw, 16.5px) !important;
+  font-weight: 500 !important;
+  color: #5c432d !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 0 6px !important;
+  line-height: 1.3 !important;
+}
+
+.gift-dedication .dedication-tagline {
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: clamp(9px, 2.5vw, 11.5px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: #8c6b45 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.hands-image { width:100%; height:auto; display:block; mask-image:linear-gradient(transparent 0%,#000 24%); }
 .dua { position:relative; isolation:isolate; background:var(--ivory); }
 .dua::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(#fcfaf657,#fcfaf65c),var(--verse-bg) center bottom/cover no-repeat; mask-image:linear-gradient(transparent,#000 19%,#000 73%,transparent); pointer-events:none; }
 .dua-content { padding:90px 12% 160px; }
@@ -186,11 +246,13 @@ body { background:#e9e2d6; }
   .date-section { padding:78px 22px 54px; }
   .countdown-units { gap:7px; }
   .countdown-label { font-size:8px; letter-spacing:.08em; }
-  .event-card { padding:64px 10% 110px; }
-  .programme-name { font-size:12px; }
-  .programme-time { font-size:19px; }
-  .event-name { font-size:30px; }
-  .gift-copy { margin-bottom:-20px; }
+  .event-card { padding: 64px 10% 110px; }
+  .programme { width: 100% !important; max-width: 100% !important; }
+  .programme-row { padding: 8px 10px !important; gap: 6px !important; }
+  .programme-name { font-size: 11px !important; letter-spacing: 0.06em !important; }
+  .programme-time { font-size: 11.5px !important; }
+  .event-name { font-size: 30px; }
+  .gift-copy { margin-bottom: -10px; }
 }
 @media(max-width:599px) and (max-height:680px) {
   .hero,.opening-art { --hero-copy-top:max(20px,calc((var(--hero-height) - var(--hero-art-height)) / 2 + var(--hero-art-height) * .145)); }
@@ -317,19 +379,23 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
   margin-bottom: 4px !important;
 }
 
-/* Refined, harmonious programme list */
+/* Refined, harmonious programme list across all devices */
 .programme {
-  max-width: 340px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 325px !important;
   margin: 0 auto !important;
   text-align: center !important;
 }
 
 .programme-row {
+  box-sizing: border-box !important;
+  width: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 12px !important;
-  padding: 10px 14px !important;
+  gap: 8px !important;
+  padding: 9px 12px !important;
   margin-bottom: 8px !important;
   background: rgba(255, 253, 248, 0.72) !important;
   border: 1px solid rgba(184, 147, 74, 0.25) !important;
@@ -342,21 +408,26 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
 }
 
 .programme-name {
+  flex-shrink: 0 !important;
   font-family: var(--font-label, 'Cormorant SC', serif) !important;
-  font-size: 13.5px !important;
+  font-size: clamp(11.5px, 3vw, 13px) !important;
   font-weight: 600 !important;
   color: #5c3e26 !important;
-  letter-spacing: 0.12em !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
+  line-height: 1 !important;
 }
 
 .programme-time {
+  flex: 1 1 auto !important;
   font-family: var(--font-body, 'Marcellus', serif) !important;
-  font-size: 14.5px !important;
+  font-size: clamp(11.5px, 3.2vw, 14px) !important;
   font-weight: 500 !important;
   color: #855f3e !important;
   letter-spacing: 0.02em !important;
   white-space: nowrap !important;
+  text-align: right !important;
+  line-height: 1.2 !important;
 }
 
 /* Harmonious Venue styling */
@@ -487,12 +558,28 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
 .event-frame-top { top:0; left:0; right:0; height:62cqw; background:var(--event-bg) center top/100% auto no-repeat; mask-image:linear-gradient(#000 83%,transparent); }
 .event-frame-bottom { bottom:0; left:0; right:0; height:55cqw; background:var(--event-bg) center bottom/100% auto no-repeat; mask-image:linear-gradient(transparent,#000 18%); }
 
-.event-card { padding-bottom:clamp(125px,35vw,210px); }
-@media(max-width:380px) { .event-card { padding-bottom:112px; } }
+.event-card {
+  padding-bottom: clamp(125px, 35vw, 210px);
+}
+@media (max-width: 480px) {
+  .event-card {
+    padding-left: clamp(16px, 9vw, 36px) !important;
+    padding-right: clamp(16px, 9vw, 36px) !important;
+  }
+}
+@media (max-width: 380px) {
+  .event-card {
+    padding-bottom: 112px;
+  }
+}
 
-/* Inset programme rows from the decorative side garlands. */
-.event-card .programme { width:calc(100% - 28px); margin-inline:auto; }
-@media(max-width:380px) { .event-card .programme { width:calc(100% - 20px); } }
+/* Ensure programme rows fit comfortably on all mobile screens without touching garlands */
+.event-card .programme {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 325px !important;
+  margin-inline: auto !important;
+}
 
 
 /* ==========================================================================
@@ -626,48 +713,37 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
   100% { transform: translateX(160%); }
 }
 
-/* Card Typography Matching Attached Image 3 Exactly */
+/* Card Typography (Clean Date Only: Eyebrow, Date, Friday) */
 .scratch-reveal-eyebrow {
   font-family: var(--font-label, 'Cormorant SC', serif);
-  font-size: clamp(9.5px, 2.7cqw, 14px);
+  font-size: clamp(10px, 2.9cqw, 14.5px);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #9c7b45;
   font-weight: 600;
-  margin: 0 0 clamp(4px, 1.2cqw, 8px);
+  margin: 0 0 clamp(6px, 1.8cqw, 12px);
   line-height: 1.2;
 }
 
 .scratch-reveal-date {
   font-family: var(--font-display, 'Bodoni Moda', 'Marcellus', serif);
-  font-size: clamp(22px, 6.6cqw, 36px);
+  font-size: clamp(23px, 7.2cqw, 40px);
   font-weight: 500;
   color: #352c27;
-  line-height: 1.12;
+  line-height: 1.15;
   letter-spacing: 0.02em;
-  margin: 0 0 clamp(4px, 1.2cqw, 8px);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  margin: 0 0 clamp(6px, 1.8cqw, 12px);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
 }
 
 .scratch-reveal-time {
   font-family: var(--font-body, 'Marcellus', serif);
-  font-size: clamp(12px, 3.4cqw, 17.5px);
-  color: #5c432d;
-  letter-spacing: 0.02em;
-  margin: 0 0 clamp(2px, 0.7cqw, 5px);
-  line-height: 1.2;
-}
-
-.scratch-reveal-note {
-  font-family: var(--font-label, 'Cormorant SC', serif);
-  font-size: clamp(8.5px, 2.2cqw, 11px);
-  letter-spacing: 0.16em;
+  font-size: clamp(14px, 4cqw, 20px);
+  color: #705236;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #8c7052;
   margin: 0;
   line-height: 1.2;
-}
-  color: var(--muted, #806752);
 }
 
 /* Celebration Bloom Animation on Frame */
