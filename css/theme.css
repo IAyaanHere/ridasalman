@@ -237,19 +237,227 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
 .event-card { border:1px solid transparent; background:var(--ivory); border-image-source:var(--event-bg); border-image-slice:18% 12% 15% 12% fill; border-image-width:clamp(100px,29cqw,165px) clamp(27px,8cqw,45px) clamp(85px,24cqw,135px); border-image-repeat:stretch; padding:clamp(155px,42vw,245px) 14% 125px; }
 .event-card::before,.event-card::after { display:none; }
 .event-invocation { font-family:var(--font-arabic); font-size:clamp(21px,5.5vw,29px); line-height:1.8; color:var(--text); margin-bottom:7px; }
-.event-name { font-family:var(--font-script); color:var(--gold); font-size:clamp(49px,13vw,70px); line-height:1.15; margin:0; }
-.event-card .ornament { margin:17px auto 20px; }
-.event-detail { margin-top:25px; }
-.event-detail-icon { display:block; color:var(--text); font-size:24px; line-height:1; margin-bottom:13px; }
-.event-detail dt { color:var(--gold); }
-.event-date { font-size:clamp(20px,5.4vw,26px); }
-.programme-row { gap:8px; padding:9px 0; }
-.programme-name { font-size:12px; color:var(--text); }
-.programme-time { font-size:19px; color:var(--gold); }
-.event-venue { font-size:24px; color:var(--text); }
-.event-address { font-size:12px; line-height:1.8; color:var(--text); }
-.event-actions { margin-top:22px; }
-@media(max-width:380px) { .event-card { padding:145px 13% 112px; } .programme-name { font-size:11px; } .programme-time { font-size:17px; } .event-venue { font-size:22px; } }
+.event-name {
+  font-family: var(--font-script, 'Parisienne', cursive) !important;
+  color: #a08048 !important;
+  font-size: clamp(42px, 11vw, 62px) !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.event-card .ornament {
+  margin: 14px auto 18px !important;
+  color: #c49a50 !important;
+}
+
+.event-detail {
+  margin-top: 22px !important;
+  text-align: center !important;
+}
+
+/* Elegant gold-rimmed circular icon badge */
+.event-detail-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, #fffefc 40%, #f6eee0 100%) !important;
+  border: 1px solid rgba(184, 147, 74, 0.45) !important;
+  box-shadow: 0 3px 10px rgba(112, 82, 54, 0.1) !important;
+  color: #a08048 !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  margin: 0 auto 10px !important;
+}
+
+.event-detail dt {
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: #9c7b45 !important;
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+}
+
+.event-date {
+  font-family: var(--font-body, 'Marcellus', serif) !important;
+  font-size: clamp(20px, 5.2vw, 25px) !important;
+  color: #5c3e26 !important;
+  font-weight: 600 !important;
+}
+
+.event-weekday {
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.18em !important;
+  color: #8c6742 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 4px !important;
+}
+
+/* Refined, harmonious programme list */
+.programme {
+  max-width: 340px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.programme-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  margin-bottom: 8px !important;
+  background: rgba(255, 253, 248, 0.72) !important;
+  border: 1px solid rgba(184, 147, 74, 0.25) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(112, 82, 54, 0.05) !important;
+}
+
+.programme-row:last-child {
+  margin-bottom: 0 !important;
+}
+
+.programme-name {
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #5c3e26 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+.programme-time {
+  font-family: var(--font-body, 'Marcellus', serif) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: #855f3e !important;
+  letter-spacing: 0.02em !important;
+  white-space: nowrap !important;
+}
+
+/* Harmonious Venue styling */
+.event-venue {
+  display: block !important;
+  font-family: var(--font-body, 'Marcellus', serif) !important;
+  font-size: clamp(20px, 5.2vw, 24px) !important;
+  font-weight: 600 !important;
+  color: #5c3e26 !important;
+  line-height: 1.32 !important;
+  margin: 6px auto 0 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.event-address {
+  display: block !important;
+  font-family: var(--font-body, 'Marcellus', serif) !important;
+  font-size: clamp(12px, 3.2vw, 13.5px) !important;
+  line-height: 1.75 !important;
+  color: #7d614d !important;
+  max-width: 310px !important;
+  margin: 8px auto 0 !important;
+}
+
+/* Aesthetic Embedded Google Map Frame */
+.embedded-map-frame {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 18px auto 8px !important;
+  padding: 5px !important;
+  background: radial-gradient(ellipse at center, #fffdf8, #f5ebd8) !important;
+  border: 1px solid rgba(184, 147, 74, 0.45) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 18px rgba(112, 82, 54, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.embedded-map-inner {
+  position: relative !important;
+  width: 100% !important;
+  height: 220px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #f0e6d6 !important;
+}
+
+.google-map-iframe {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  filter: saturate(0.92) contrast(1.02) !important;
+}
+
+/* Event Action Google Maps Button */
+.event-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+.map-google-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  min-height: 44px !important;
+  padding: 10px 18px !important;
+  background: #705236 !important;
+  color: #fffaf0 !important;
+  border: 1px solid #705236 !important;
+  border-radius: 4px !important;
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  box-shadow: 0 3px 12px rgba(112, 82, 54, 0.22) !important;
+  transition: all 0.25s ease !important;
+}
+
+.map-google-btn:hover {
+  background: #543924 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 5px 16px rgba(112, 82, 54, 0.3) !important;
+}
+
+.map-google-btn svg {
+  color: #f7d58b !important;
+}
+
+.calendar-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  color: #8c6742 !important;
+  font-family: var(--font-label, 'Cormorant SC', serif) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  padding: 6px 12px !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.calendar-link:hover {
+  color: #5c3e26 !important;
+}
 
 /* Scale the top/bottom artwork uniformly; extend only repeating side garlands. */
 .event-card { border:0; border-image:none; background:#f1e8dc; }
@@ -269,49 +477,318 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
 @media(max-width:380px) { .event-card .programme { width:calc(100% - 20px); } }
 
 
-/* Heart-shaped scratch dates */
-.scratch-celebration {
-  position:fixed;
-  inset:0;
-  display:block;
-  width:100%;
-  height:100%;
-  z-index:40;
-  pointer-events:none;
-}
+/* ==========================================================================
+   Aesthetic Single Frame Scratch & Reveal
+   Replaces old 3-heart scratch cards with the luxury floral golden frame
+   ========================================================================== */
 
-.scratch-circle {
-  --heart-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 91C42 82 5 58 5 31C5 6 37 1 50 23C63 1 95 6 95 31C95 58 58 82 50 91Z'/%3E%3C/svg%3E");
-
-  border-radius: 0;
-  -webkit-mask: var(--heart-mask) center / 100% 100% no-repeat;
-  mask: var(--heart-mask) center / 100% 100% no-repeat;
-}
-
-.scratch-canvas {
-  border-radius: 0;
-}
-
-.scratch-decoration {
+.scratch-cards {
   display: block;
-  inset: 0;
-  border: 0;
-  border-radius: 0;
-  z-index: 2;
-  pointer-events: none;
-  /* The heart mask clips the outer half of this fixed 4px stroke, leaving
-     a 2px gold rim above both the scratch coating and the revealed date. */
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='gold' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23977236'/%3E%3Cstop offset='.3' stop-color='%23e6cc92'/%3E%3Cstop offset='.6' stop-color='%238d642a'/%3E%3Cstop offset='1' stop-color='%23bd9754'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 91C42 82 5 58 5 31C5 6 37 1 50 23C63 1 95 6 95 31C95 58 58 82 50 91Z' fill='none' stroke='url(%23gold)' stroke-width='4' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-}
-
-.scratch-decoration::before,
-.scratch-decoration::after {
-  display: none;
-}
-
-.scratch-value {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 0 8px;
   box-sizing: border-box;
-  padding-bottom: 12%;
+}
+
+.scratch-frame-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.scratch-frame-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1024 / 682;
+  margin: 0 auto;
+  isolation: isolate;
+  filter: drop-shadow(0 14px 28px rgba(112, 82, 54, 0.16));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+}
+
+/* Viewport situated precisely within the floral golden arch opening */
+.scratch-frame-viewport {
+  position: absolute;
+  top: 18%;
+  bottom: 15%;
+  left: 14%;
+  right: 14%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 42%, #fffdfa 15%, #fcf7ec 60%, #f1e2cc 100%);
+  box-shadow: inset 0 0 25px rgba(160, 128, 72, 0.2), inset 0 0 8px rgba(112, 82, 54, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Frame overlay sitting on top of the card and canvas with crisp alpha */
+.scratch-frame-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 5;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Scratch Canvas */
+.scratch-frame-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  touch-action: none;
+  cursor: crosshair;
+  border-radius: 8px;
+  transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.75s ease;
+}
+
+/* Revealed Wedding Date Card inside the Frame */
+.scratch-revealed-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5% 6%;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 1;
+  border: 1px solid rgba(177, 138, 72, 0.35);
+  box-shadow: inset 0 0 0 3px rgba(255, 252, 245, 0.88), inset 0 0 0 4px rgba(177, 138, 72, 0.22);
+  border-radius: 6px;
+  transform: scale(0.97);
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.scratch-frame-container.is-revealed .scratch-revealed-card {
+  transform: scale(1);
+}
+
+/* Shimmer Light Sweep across Revealed Card */
+.scratch-revealed-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255, 248, 220, 0.55) 48%, rgba(255, 255, 255, 0.9) 52%, transparent 75%);
+  transform: translateX(-160%);
+  pointer-events: none;
+}
+
+.scratch-frame-container.is-revealed .scratch-revealed-card::after {
+  animation: card-light-sweep 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s forwards;
+}
+
+@keyframes card-light-sweep {
+  0% { transform: translateX(-160%); }
+  100% { transform: translateX(160%); }
+}
+
+/* Card Typography & Layout */
+.scratch-reveal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-label, 'Cormorant SC', serif);
+  font-size: clamp(8px, 2.1vw, 11px);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted, #806752);
+  margin-bottom: clamp(1px, 0.8vw, 5px);
+}
+
+.scratch-reveal-flourish {
+  font-size: clamp(7px, 1.6vw, 9px);
+  color: var(--gold, #A08048);
+}
+
+.scratch-date-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2.6vw, 24px);
+  width: 100%;
+  margin: clamp(1px, 0.6vw, 4px) 0;
+}
+
+.scratch-date-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scratch-date-val {
+  font-family: var(--font-body, 'Marcellus', serif);
+  font-size: clamp(20px, 6vw, 36px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--maroon, #705236);
+  letter-spacing: 0.03em;
+}
+
+.scratch-date-lbl {
+  font-family: var(--font-label, 'Cormorant SC', serif);
+  font-size: clamp(7.5px, 1.8vw, 10px);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold, #A08048);
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.scratch-date-divider {
+  font-size: clamp(8px, 1.8vw, 11px);
+  color: var(--gold, #A08048);
+  opacity: 0.75;
+}
+
+.scratch-reveal-footer {
+  margin-top: clamp(2px, 0.8vw, 6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.scratch-reveal-weekday {
+  font-family: var(--font-script, 'Parisienne', cursive);
+  font-size: clamp(13px, 3.8vw, 20px);
+  line-height: 1.15;
+  color: var(--maroon, #705236);
+}
+
+.scratch-reveal-venue {
+  font-family: var(--font-label, 'Cormorant SC', serif);
+  font-size: clamp(7.5px, 1.7vw, 9.5px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted, #806752);
+}
+
+/* Celebration Bloom Animation on Frame */
+.scratch-frame-container.is-revealed {
+  animation: frame-reveal-bloom 1.4s ease-out forwards;
+}
+
+@keyframes frame-reveal-bloom {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 14px 28px rgba(112, 82, 54, 0.16));
+  }
+  45% {
+    transform: scale(1.025);
+    filter: drop-shadow(0 18px 42px rgba(212, 160, 60, 0.48)) drop-shadow(0 0 32px rgba(244, 194, 201, 0.45));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 14px 32px rgba(112, 82, 54, 0.22)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.25));
+  }
+}
+
+/* Live scratching spark particles */
+.scratch-live-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.scratch-spark-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, #fffdf8, #f5d995 60%, #c9983e);
+  box-shadow: 0 0 6px #f7d58b, 0 0 10px rgba(255, 215, 0, 0.85);
+  animation: spark-fly 0.65s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes spark-fly {
+  0% { transform: translate(0, 0) scale(1.3); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
+}
+
+/* Fullscreen Celebration Canvas */
+.scratch-celebration {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  pointer-events: none;
+}
+
+/* Aesthetic Venue Vector Map Card */
+.venue-map-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 18px auto 6px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(112, 82, 54, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venue-map-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(112, 82, 54, 0.16);
+}
+
+.venue-map-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.venue-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Event Action Buttons */
+.event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.map-google-btn {
+  background: #705236 !important;
+  color: #fffaf0 !important;
+  border: 1px solid #705236 !important;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(112, 82, 54, 0.2);
+}
+
+.map-google-btn:hover {
+  background: #5c3f25 !important;
+  color: #ffffff !important;
+}
+
+.map-google-btn svg {
+  color: #f7d58b;
+}
+
+.celebration-signoff {
+  white-space: pre-line !important;
 }
 
 :root {

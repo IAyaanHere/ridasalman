@@ -1,16 +1,15 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Naqsh Digital//Amina Zayan Nikkah Demo//EN
+PRODID:-//Noor Invites//Rida Salman Nikah//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:amina-zayan-demo-nikkah-20270123@naqshdigital.in
-DTSTAMP:20261023T000000Z
-DTSTART:20270123T053000Z
-SUMMARY:Amina & Zayan — Nikkah Ceremony (Demo)
-LOCATION:The Ivory Pavilion (fictional)\, Crescent Avenue\,
-  Bengaluru\, India
-DESCRIPTION:Fictional invitation demo.\nNikkah at 11:00 am IST
-  (Asia/Kolkata\, UTC+05:30).\nReception Lunch at 1:00 pm IST.
+UID:rida-salman-nikah-20270115@noorinvites.com
+DTSTAMP:20261031T000000Z
+DTSTART:20270115T124500Z
+DTEND:20270115T173000Z
+SUMMARY:Nikah — Rida & Salman
+LOCATION:The Grand Hamvi Garden\, Veera Desai Rd\, next to Country Club\, Mumbai\, Maharashtra 400053
+DESCRIPTION:Nikah Ceremony of Rida Shaikh & Salman Mamtule.\nNikah: After Namaz e Magrib\nDinner to be followed.\nVenue: The Grand Hamvi Garden\, Mumbai.
 END:VEVENT
 END:VCALENDAR

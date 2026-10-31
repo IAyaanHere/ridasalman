@@ -27,31 +27,100 @@
   Object.entries(config.theme).forEach(([key, value]) => root.style.setProperty(`--${key.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase())}`, value));
   [['--lace-image', 'divider'], ['--scratch-bg', 'scratchBackground'], ['--formal-bg', 'formalBackground'], ['--event-bg', 'eventBackground'], ['--verse-bg', 'verseBackground'], ['--blessings-bg', 'blessingsBackground']].forEach(([key, media]) => root.style.setProperty(key, `url("${new URL(config.media[media], location.href).href}")`));
 
-  let revealedCount = 0, dateCelebrated = false;
-  config.scratch.items.forEach(item => {
-    const wrapper = element('div', 'scratch-item');
-    const circle = element('div', 'scratch-circle');
-    const decoration = element('div', 'scratch-decoration'); decoration.setAttribute('aria-hidden', 'true');
-    const value = element('span', 'scratch-value', item.value); value.setAttribute('aria-hidden', 'true');
-    const canvas = element('canvas', 'scratch-canvas'); canvas.tabIndex = 0; canvas.setAttribute('role', 'button');
-    canvas.setAttribute('aria-label', `${config.interface.revealDate} ${item.label.toLowerCase()}: ${config.scratch.accessibilityHint}`);
-    circle.append(decoration, value, canvas); wrapper.append(circle, element('p', 'scratch-label', item.label));
-    select('#scratchCards').append(wrapper);
+  const scratchCards = select('#scratchCards');
+  if (scratchCards) {
+    scratchCards.innerHTML = '';
+
+    const frameWrapper = element('div', 'scratch-frame-wrapper');
+    const frameContainer = element('div', 'scratch-frame-container');
+    const frameViewport = element('div', 'scratch-frame-viewport');
+
+    // Build the revealed card
+    const card = element('div', 'scratch-revealed-card');
+
+    // Header flourish & eyebrow
+    const header = element('div', 'scratch-reveal-header');
+    header.append(
+      element('span', 'scratch-reveal-flourish', '✦'),
+      element('span', 'scratch-reveal-eyebrow', config.scratch.eyebrow || 'SAVE OUR DATE'),
+      element('span', 'scratch-reveal-flourish', '✦')
+    );
+
+    // Date Grid: Day, Month, Year
+    const dateGrid = element('div', 'scratch-date-grid');
+    const items = config.scratch.items || [
+      { value: '23', label: 'Day' },
+      { value: 'JAN', label: 'Month' },
+      { value: '2027', label: 'Year' }
+    ];
+    items.forEach((item, index) => {
+      if (index > 0) {
+        const divider = element('span', 'scratch-date-divider', '✦');
+        divider.setAttribute('aria-hidden', 'true');
+        dateGrid.append(divider);
+      }
+      const col = element('div', 'scratch-date-col');
+      col.append(
+        element('span', 'scratch-date-val', item.value),
+        element('span', 'scratch-date-lbl', item.label)
+      );
+      dateGrid.append(col);
+    });
+
+    // Footer with weekday, ceremony time & venue
+    const footer = element('div', 'scratch-reveal-footer');
+    const firstEvent = config.events?.[0];
+    const weekdayText = firstEvent?.weekday
+      ? `${firstEvent.weekday}${firstEvent.programme?.[0]?.time ? ' · ' + firstEvent.programme[0].time : ''}`
+      : (config.countdown?.dateLine || '');
+    if (weekdayText) {
+      footer.append(element('span', 'scratch-reveal-weekday', weekdayText));
+    }
+    const venueText = firstEvent?.venue || '';
+    if (venueText) {
+      footer.append(element('span', 'scratch-reveal-venue', venueText));
+    }
+
+    card.append(header, dateGrid, footer);
+
+    // Scratch Canvas
+    const canvas = element('canvas', 'scratch-frame-canvas');
+    canvas.tabIndex = 0;
+    canvas.setAttribute('role', 'button');
+    canvas.setAttribute('aria-label', `${config.interface?.revealDate || 'Reveal date'}: ${config.scratch.accessibilityHint}`);
+
+    frameViewport.append(card, canvas);
+
+    // Frame overlay image
+    const overlay = element('img', 'scratch-frame-overlay');
+    overlay.src = './assets/images/scratch-frame.webp';
+    overlay.alt = '';
+    overlay.setAttribute('aria-hidden', 'true');
+
+    // Live touch sparks layer
+    const liveSparks = element('div', 'scratch-live-sparks');
+    liveSparks.setAttribute('aria-hidden', 'true');
+
+    frameContainer.append(frameViewport, overlay, liveSparks);
+    frameWrapper.append(frameContainer);
+    scratchCards.append(frameWrapper);
+
+    let dateCelebrated = false;
     window.NaqshScratch(canvas, {
-      ...item, coverLabel: config.scratch.coverLabel, threshold: config.scratch.threshold,
+      coverLabel: config.scratch.coverLabel || 'SCRATCH TO REVEAL',
+      threshold: config.scratch.threshold || 0.35,
       onReveal() {
-        revealedCount++;
-        const complete = revealedCount === config.scratch.items.length;
-        select('#scratchStatus').textContent = complete ? config.scratch.completeMessage : `${item.label}: ${item.value}`;
-        if (complete && !dateCelebrated) {
+        if (!dateCelebrated) {
           dateCelebrated = true;
-          select('#countdown').classList.add('is-date-revealed');
-          select('#countdownUnits').removeAttribute('aria-hidden');
+          frameContainer.classList.add('is-revealed');
+          select('#scratchStatus').textContent = config.scratch.completeMessage;
+          select('#countdown')?.classList.add('is-date-revealed');
+          select('#countdownUnits')?.removeAttribute('aria-hidden');
           window.NaqshCelebrateDate?.();
         }
-      },
+      }
     });
-  });
+  }
 
   // The same independently authored ornamental seals used in garden-custom.
   function mandala() {
@@ -119,25 +188,58 @@
       invocation.lang = 'ar'; invocation.dir = 'rtl'; card.append(invocation);
     }
     card.append(title, ornament, details);
+
+    // Aesthetic embedded Google Map Frame
+    const mapCard = element('div', 'embedded-map-frame');
+    const mapLink = event.mapUrl || 'https://maps.google.com/?q=The+Grand+Hamvi+Garden,+Veera+Desai+Rd,+next+to+Country+Club,+Mumbai,+Maharashtra+400053';
+
+    mapCard.innerHTML = `
+      <div class="embedded-map-inner">
+        <iframe
+          class="google-map-iframe"
+          src="https://maps.google.com/maps?q=The+Grand+Hamvi+Garden+Veera+Desai+Rd+next+to+Country+Club+Mumbai+Maharashtra+400053&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="220"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Google Map - The Grand Hamvi Garden, Mumbai"
+        ></iframe>
+      </div>
+    `;
+
+    card.append(mapCard);
+
     const actions = element('div', 'event-actions');
-    if (event.locationDemoMessage) {
-      const button = element('button', 'map-link'); button.type = 'button';
-      const message = element('p', 'location-demo-message', event.locationDemoMessage);
-      message.id = `${event.id}LocationDemo`; message.hidden = true; message.setAttribute('role', 'status');
-      button.setAttribute('aria-controls', message.id); button.setAttribute('aria-expanded', 'false');
-      button.addEventListener('click', () => {
-        message.hidden = !message.hidden;
-        button.setAttribute('aria-expanded', String(!message.hidden));
-      });
-      const ns = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(ns, 'svg'); svg.setAttribute('width', '13'); svg.setAttribute('height', '15'); svg.setAttribute('viewBox', '0 0 24 28'); svg.setAttribute('aria-hidden', 'true');
-      const path = document.createElementNS(ns, 'path'); path.setAttribute('d', 'M12 2a9 9 0 0 0-9 9c0 6 9 15 9 15s9-9 9-15a9 9 0 0 0-9-9Z M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0'); path.setAttribute('fill', 'none'); path.setAttribute('stroke', 'currentColor'); path.setAttribute('stroke-width', '1.5'); svg.append(path);
-      button.append(svg, element('span', '', event.mapLabel)); actions.append(button, message);
-    }
-    const calendar = element('a', 'map-link calendar-link', event.calendarLabel);
-    calendar.href = './media/nikkah.ics'; calendar.download = 'Amina-Zayan-Nikkah.ics';
-    actions.append(calendar); card.append(actions);
-    section.append(card); select('#events').append(section);
+    const mapBtn = element('a', 'map-link map-google-btn');
+    mapBtn.href = mapLink;
+    mapBtn.target = '_blank';
+    mapBtn.rel = 'noopener noreferrer';
+    mapBtn.innerHTML = `
+      <svg width="14" height="17" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M12 2a9 9 0 0 0-9 9c0 6 9 15 9 15s9-9 9-15a9 9 0 0 0-9-9Z M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+      </svg>
+      <span>${event.mapLabel || 'Open in Google Maps'}</span>
+    `;
+
+    const calendar = element('a', 'map-link calendar-link');
+    calendar.href = './media/nikkah.ics';
+    calendar.download = 'Rida-Salman-Nikah.ics';
+    calendar.innerHTML = `
+      <svg width="14" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      <span>${event.calendarLabel || 'Save to calendar'}</span>
+    `;
+
+    actions.append(mapBtn, calendar);
+    card.append(actions);
+    section.append(card);
+    select('#events').append(section);
   });
   select('#handsImage').src = config.media.hands;
   select('#closingMonogram').src = config.media.monogram;

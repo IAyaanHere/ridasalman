@@ -1,15 +1,15 @@
-/** Fictional demo invitation: pearl event card and controlled opening. */
+/** Wedding invitation configuration for Rida & Salman. */
 window.INVITATION_CONFIG = {
   "site": {
     "language": "en",
-    "title": "Amina & Zayan — Nikkah Invitation Demo",
-    "description": "A fictional Nikkah invitation demo for Amina Rahman and Zayan Farooq.",
-    "ogTitle": "Wedding Invitation Demo — Amina & Zayan",
-    "ogDescription": "Tap to Open · Fictional invitation demo"
+    "title": "Rida & Salman — Wedding Invitation",
+    "description": "Wedding invitation for Rida Shaikh and Salman Mamtule · Friday, 15th January 2027.",
+    "ogTitle": "Wedding Invitation — Rida & Salman",
+    "ogDescription": "Tap to Open · Rida Shaikh & Salman Mamtule · Friday, 15th January 2027"
   },
   "couple": {
-    "bride": "Amina Rahman",
-    "groom": "Zayan Farooq",
+    "bride": "Rida Shaikh",
+    "groom": "Salman Mamtule",
     "separator": "&"
   },
   "theme": {
@@ -26,9 +26,9 @@ window.INVITATION_CONFIG = {
     "introVideo": "./media/ribbon-doves-intro-v3-fast.mp4",
     "introPoster": "./assets/images/ribbon-poster-v2.jpg",
     "heroPoster": "./assets/images/mosque-couple-fast-final.webp",
-    "monogram": "./assets/images/gold-az-monogram-custom.png",
+    "monogram": "./assets/images/gold-rs-monogram-custom.png",
     "ogImage": "./assets/images/wedding-demo.jpg",
-    "music": "./media/audio-5.mp3",
+    "music": "./media/Lamyati-Nazeero-Kafi-Nazarin.mp3",
     "divider": "./assets/images/divider.png",
     "scratchBackground": "./assets/images/mosque-courtyard.webp",
     "formalBackground": "./assets/images/formal-ivory-floral.webp",
@@ -39,7 +39,7 @@ window.INVITATION_CONFIG = {
   },
   "opening": {
     "label": "Open invitation",
-    "accessibleLabel": "Open wedding invitation demo",
+    "accessibleLabel": "Open wedding invitation",
     "musicVolume": 0.3,
     "transitionMs": 300,
     "playbackTimeoutMs": 12000,
@@ -47,33 +47,33 @@ window.INVITATION_CONFIG = {
     "chromeDelayMs": 2400
   },
   "hero": {
-    "bride": "Amina",
-    "groom": "Zayan",
+    "bride": "Rida",
+    "groom": "Salman",
     "bismillah": "﷽",
     "families": "Together with our families",
-    "occasions": "Nikkah Ceremony",
+    "occasions": "Nikah Ceremony",
     "scroll": "Scroll down",
-    "date": "23 January 2027"
+    "date": "15 January 2027"
   },
   "formal": {
     "eyebrow": "With the blessings of Allah",
-    "invitation": "Together with our families, we cordially invite you to share in the joy and honour us with your presence at the Nikkah of",
+    "invitation": "Together with our families, we cordially invite you to share in the joy and honour us with your presence at the Nikah of",
     "brideRelation": "Daughter of",
-    "brideParents": "Imran Rahman & Sara Rahman",
+    "brideParents": "Mrs. Naseem & Mr. Abdulrahim Abdulrauf Shaikh",
     "joining": "and",
     "groomRelation": "Son of",
-    "groomParents": "Yusuf Farooq & Mariam Farooq",
+    "groomParents": "Mrs. Farzana & Mr. Musa Abdulla Mamtule",
     "closing": ""
   },
   "scratch": {
     "eyebrow": "A date to remember",
     "title": "Save the date",
     "coverLabel": "Reveal",
-    "threshold": 0.45,
+    "threshold": 0.35,
     "accessibilityHint": "scratch, or press Enter or Space",
     "items": [
       {
-        "value": "23",
+        "value": "15",
         "label": "Day"
       },
       {
@@ -85,12 +85,12 @@ window.INVITATION_CONFIG = {
         "label": "Year"
       }
     ],
-    "completeMessage": "Saturday, 23 January 2027.",
-    "hint": "Scratch the gold seals to reveal our date."
+    "completeMessage": "Friday, 15th January 2027.",
+    "hint": "Scratch the frame to reveal our wedding date."
   },
   "countdown": {
-    "title": "Until our Nikkah",
-    "isoDate": "2027-01-23T11:00:00+05:30",
+    "title": "Until our Nikah",
+    "isoDate": "2027-01-15T18:15:00+05:30",
     "timeZone": "Asia/Kolkata",
     "labels": [
       "Days",
@@ -98,31 +98,31 @@ window.INVITATION_CONFIG = {
       "Minutes",
       "Seconds"
     ],
-    "dateLine": "Saturday, 23 January 2027",
-    "accessibleLabel": "Time until the Nikkah on 23 January 2027 at 11 am, India Standard Time",
-    "completeMessage": "Our Nikkah day has arrived."
+    "dateLine": "Friday, 15 January 2027",
+    "accessibleLabel": "Time until the Nikah on 15 January 2027, India Standard Time",
+    "completeMessage": "Our Nikah day has arrived."
   },
   "events": [
     {
-      "id": "nikkah",
-      "eyebrow": "The celebration",
-      "name": "Nikkah",
-      "weekday": "Saturday",
-      "date": "23 January 2027",
+      "id": "nikah",
+      "eyebrow": "The auspicious occasion",
+      "name": "Nikah Ceremony",
+      "weekday": "Friday",
+      "date": "15th January 2027",
       "programme": [
         {
-          "name": "Nikkah",
-          "time": "11:00 am"
+          "name": "Nikah",
+          "time": "After Namaz e Magrib"
         },
         {
-          "name": "Lunch",
-          "time": "1:00 pm"
+          "name": "Dinner",
+          "time": "To be followed"
         }
       ],
-      "venue": "The Ivory Pavilion",
-      "address": "Crescent Avenue · Bengaluru · India",
-      "locationDemoMessage": "Demo location only. The Ivory Pavilion is a fictional venue; no directions are available.",
-      "mapLabel": "View location",
+      "venue": "The Grand Hamvi Garden",
+      "address": "Veera Desai Rd, next to Country Club, Mumbai, Maharashtra 400053",
+      "mapUrl": "https://maps.google.com/?q=The+Grand+Hamvi+Garden,+Veera+Desai+Rd,+next+to+Country+Club,+Mumbai,+Maharashtra+400053",
+      "mapLabel": "Open in Google Maps",
       "calendarLabel": "Save to calendar",
       "invocation": "إِنْ شَاءَ اللَّهُ"
     }
@@ -145,9 +145,9 @@ window.INVITATION_CONFIG = {
     "message": "آمين"
   },
   "wellWishes": {
-    "eyebrow": "A beautiful beginning",
-    "message": "We look forward to celebrating with you.",
-    "signoff": "With love, Amina & Zayan"
+    "eyebrow": "With prayers & gratitude",
+    "message": "We look forward to celebrating this blessed union with you.",
+    "signoff": "with best compliments from Shaikh Family"
   },
   "interface": {
     "muteMusic": "Mute music",
