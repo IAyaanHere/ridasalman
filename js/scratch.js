@@ -32,74 +32,44 @@ window.NaqshScratch = function initializeScratch(canvas, settings) {
     function random() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
 
     // White pearl highlights
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 70; i++) {
       const x = random() * width, y = random() * height;
-      context.fillStyle = `rgba(255, 255, 255, ${0.4 + random() * 0.45})`;
-      context.beginPath();
-      context.arc(x, y, 0.4 + random() * 1.3, 0, Math.PI * 2);
-      context.fill();
-    }
-    // Delicate blush peach shimmer
-    for (let i = 0; i < 45; i++) {
-      const x = random() * width, y = random() * height;
-      context.fillStyle = `rgba(235, 175, 165, ${0.18 + random() * 0.22})`;
+      context.fillStyle = `rgba(255, 255, 255, ${0.45 + random() * 0.45})`;
       context.beginPath();
       context.arc(x, y, 0.5 + random() * 1.4, 0, Math.PI * 2);
       context.fill();
     }
-    // Muted antique champagne dust
-    for (let i = 0; i < 30; i++) {
+    // Delicate blush peach shimmer
+    for (let i = 0; i < 50; i++) {
       const x = random() * width, y = random() * height;
-      context.fillStyle = `rgba(165, 130, 85, ${0.1 + random() * 0.16})`;
+      context.fillStyle = `rgba(235, 175, 165, ${0.2 + random() * 0.25})`;
       context.beginPath();
-      context.arc(x, y, 0.4 + random() * 1.1, 0, Math.PI * 2);
+      context.arc(x, y, 0.6 + random() * 1.5, 0, Math.PI * 2);
       context.fill();
     }
-
-    // Delicate inner border in soft antique bronze & blush
-    const pad1 = Math.max(5, Math.min(width, height) * 0.042);
-    const pad2 = pad1 + Math.max(3, Math.min(width, height) * 0.022);
-
-    context.save();
-    context.strokeStyle = 'rgba(180, 140, 110, 0.38)';
-    context.lineWidth = 1;
-    context.strokeRect(pad1, pad1, width - pad1 * 2, height - pad1 * 2);
-
-    context.strokeStyle = 'rgba(165, 130, 85, 0.25)';
-    context.setLineDash([3, 3]);
-    context.strokeRect(pad2, pad2, width - pad2 * 2, height - pad2 * 2);
-    context.setLineDash([]);
-
-    // Corner diamond accents
-    function drawDiamond(cx, cy, s) {
-      context.fillStyle = '#b89468';
+    // Muted antique champagne & gold stardust
+    for (let i = 0; i < 40; i++) {
+      const x = random() * width, y = random() * height;
+      context.fillStyle = `rgba(180, 145, 90, ${0.18 + random() * 0.22})`;
       context.beginPath();
-      context.moveTo(cx, cy - s);
-      context.lineTo(cx + s, cy);
-      context.lineTo(cx, cy + s);
-      context.lineTo(cx - s, cy);
-      context.closePath();
+      context.arc(x, y, 0.5 + random() * 1.3, 0, Math.PI * 2);
       context.fill();
     }
-    const dSize = Math.max(2, Math.min(width, height) * 0.018);
-    drawDiamond(pad1, pad1, dSize);
-    drawDiamond(width - pad1, pad1, dSize);
-    drawDiamond(pad1, height - pad1, dSize);
-    drawDiamond(width - pad1, height - pad1, dSize);
 
     // Calligraphic & embossed text matching the frame's warm mocha palette
+    context.save();
     const midY = height / 2;
-    const fontSize = Math.max(10, Math.min(18, height * 0.12));
+    const fontSize = Math.max(11, Math.min(20, height * 0.115));
 
     // Top decorative motif
     context.font = `${Math.max(7, fontSize * 0.65)}px "Marcellus", serif`;
     context.fillStyle = 'rgba(150, 115, 85, 0.85)';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.fillText('✦   ❦   ✦', width / 2, midY - fontSize * 1.45);
+    context.fillText('✦   ❦   ✦', width / 2, midY - fontSize * 1.35);
 
     // Main label text in Cormorant SC
-    const labelText = (settings.coverLabel || 'SCRATCH TO REVEAL').toUpperCase();
+    const labelText = (settings.coverLabel || 'REVEAL').toUpperCase();
     context.font = `600 ${fontSize}px "Cormorant SC", serif`;
 
     // Embossed soft light highlight underneath
@@ -111,9 +81,9 @@ window.NaqshScratch = function initializeScratch(canvas, settings) {
     context.fillText(labelText, width / 2, midY);
 
     // Subtitle in cursive script (rose mocha)
-    context.font = `400 ${Math.max(10, fontSize * 0.95)}px "Parisienne", "Monsieur La Doulaise", cursive`;
+    context.font = `400 ${Math.max(11, fontSize * 0.95)}px "Parisienne", "Monsieur La Doulaise", cursive`;
     context.fillStyle = '#9c6f55';
-    context.fillText('Our Wedding Date', width / 2, midY + fontSize * 1.42);
+    context.fillText('Our Wedding Date', width / 2, midY + fontSize * 1.35);
 
     context.restore();
   }

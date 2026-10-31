@@ -35,53 +35,35 @@
     const frameContainer = element('div', 'scratch-frame-container');
     const frameViewport = element('div', 'scratch-frame-viewport');
 
-    // Build the revealed card
+    // Build the revealed card matching image layout
     const card = element('div', 'scratch-revealed-card');
 
-    // Header flourish & eyebrow
-    const header = element('div', 'scratch-reveal-header');
-    header.append(
-      element('span', 'scratch-reveal-flourish', '✦'),
-      element('span', 'scratch-reveal-eyebrow', config.scratch.eyebrow || 'SAVE OUR DATE'),
-      element('span', 'scratch-reveal-flourish', '✦')
+    // Subtle background sparkles matching the floral frame
+    const sparkles = element('div', 'scratch-reveal-sparkles');
+    sparkles.setAttribute('aria-hidden', 'true');
+
+    // Occasion Eyebrow (e.g. NIKAH CEREMONY)
+    const eyebrow = element('p', 'scratch-reveal-eyebrow', config.hero?.occasions || 'NIKAH CEREMONY');
+
+    // Main Wedding Date (January 15, 2027)
+    const dateText = element('h3', 'scratch-reveal-date', 'January 15, 2027');
+
+    // Day & Ceremony Time (Friday • After Namaz e Magrib)
+    const firstEvent = config.events?.[0];
+    const ceremonyDetail = element('p', 'scratch-reveal-time',
+      firstEvent?.weekday && firstEvent.programme?.[0]?.time
+        ? `${firstEvent.weekday} • ${firstEvent.programme[0].time}`
+        : 'Friday • After Namaz e Magrib'
     );
 
-    // Date Grid: Day, Month, Year
-    const dateGrid = element('div', 'scratch-date-grid');
-    const items = config.scratch.items || [
-      { value: '15', label: 'Day' },
-      { value: 'JAN', label: 'Month' },
-      { value: '2027', label: 'Year' }
-    ];
-    items.forEach((item, index) => {
-      if (index > 0) {
-        const sep = element('div', 'scratch-date-sep');
-        sep.setAttribute('aria-hidden', 'true');
-        dateGrid.append(sep);
-      }
-      const col = element('div', 'scratch-date-col');
-      col.append(
-        element('span', 'scratch-date-val', item.value),
-        element('span', 'scratch-date-lbl', item.label)
-      );
-      dateGrid.append(col);
-    });
+    // Dinner Note (Dinner to be followed)
+    const dinnerNote = element('p', 'scratch-reveal-note',
+      firstEvent?.programme?.[1]?.name
+        ? `${firstEvent.programme[1].name} to be followed`
+        : 'Dinner to be followed'
+    );
 
-    // Footer with weekday, ceremony time
-    const footer = element('div', 'scratch-reveal-footer');
-    const firstEvent = config.events?.[0];
-    const weekdayText = firstEvent?.weekday
-      ? `${firstEvent.weekday}${firstEvent.programme?.[0]?.time ? ' · ' + firstEvent.programme[0].time : ''}`
-      : (config.countdown?.dateLine || 'Friday · After Namaz e Magrib');
-    if (weekdayText) {
-      footer.append(element('span', 'scratch-reveal-weekday', weekdayText));
-    }
-    const occasionText = config.hero?.occasions || firstEvent?.name || 'Nikah Ceremony';
-    if (occasionText) {
-      footer.append(element('span', 'scratch-reveal-venue', occasionText));
-    }
-
-    card.append(header, dateGrid, footer);
+    card.append(sparkles, eyebrow, dateText, ceremonyDetail, dinnerNote);
 
     // Scratch Canvas
     const canvas = element('canvas', 'scratch-frame-canvas');
