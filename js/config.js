@@ -27,7 +27,7 @@ window.INVITATION_CONFIG = {
     "introPoster": "./assets/images/ribbon-poster-v2.jpg",
     "heroPoster": "./assets/images/mosque-couple-fast-final.webp",
     "monogram": "./assets/images/gold-rs-monogram-custom.png",
-    "ogImage": "./assets/images/wedding-demo.jpg",
+    "ogImage": "./assets/images/rida-salman-og.jpg",
     "music": "./media/Lamyati-Nazeero-Kafi-Nazarin.mp3",
     "divider": "./assets/images/divider.png",
     "scratchBackground": "./assets/images/mosque-courtyard.webp",

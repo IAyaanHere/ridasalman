@@ -526,13 +526,13 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
 }
 
-/* Viewport spans behind the arch drapes and chandelier (like Image 2 & 3) */
+/* Viewport spans behind the arch drapes and chandelier without exposing outside corners */
 .scratch-frame-viewport {
   position: absolute;
-  top: 7%;
-  bottom: 7%;
-  left: 8%;
-  right: 8%;
+  top: 13%;
+  bottom: 8.5%;
+  left: 9%;
+  right: 9%;
   border-radius: 12px;
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 45%, #fffdf8 15%, #fbf5e7 55%, #f2e2cc 100%);
@@ -576,7 +576,7 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16% 14% 13%;
+  padding: 12% 12% 10%;
   box-sizing: border-box;
   text-align: center;
   z-index: 1;
@@ -845,12 +845,23 @@ body:not(.is-chrome-ready) .hero .scroll-cue,body:not(.is-chrome-ready) .hero + 
 
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 
+  /* Hidden by default, appears only in last section */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
   transition:
-    transform 0.25s ease,
+    opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.25s ease;
 }
 
-.naqsh-preview-cta:hover {
+.naqsh-preview-cta.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.naqsh-preview-cta.is-visible:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
 }

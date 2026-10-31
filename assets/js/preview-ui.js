@@ -14,6 +14,26 @@
   let previousBodyOverflow = "";
   let previousFocus = null;
 
+  // Only show the Create Yours CTA button when user is in the last section
+  const lastSection = document.getElementById("celebration") || document.querySelector(".footer");
+  if (lastSection && "IntersectionObserver" in window) {
+    const ctaObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            trigger.classList.add("is-visible");
+          } else {
+            trigger.classList.remove("is-visible");
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    ctaObserver.observe(lastSection);
+  } else {
+    trigger.classList.add("is-visible");
+  }
+
   function openModal() {
     if (isOpen) return;
 
