@@ -112,11 +112,11 @@ window.INVITATION_CONFIG = {
       "programme": [
         {
           "name": "Nikah",
-          "time": "After Namaz e Magrib"
+          "time": "After Magrib 7.30 pm onwards"
         },
         {
           "name": "Dinner",
-          "time": "To be followed"
+          "time": "8.45 pm onwards"
         }
       ],
       "venue": "The Grand Hamvi Garden",
